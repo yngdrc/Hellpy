@@ -36,3 +36,8 @@ def createWavImage( image_file, new_file_name ):
     nf.setparams((nchannels, sampwidth, framerate, nframe, comptype, compname))
     nf.writeframes(image_data)
     nf.close()
+
+def createImageAudio( audio_path, new_name ):
+    data = readData(audio_path)
+    img = Image.frombytes('RGB', getImage('image.jpg')[0].size, data, 'raw')
+    img.save(new_name+".png")

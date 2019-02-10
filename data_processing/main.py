@@ -8,6 +8,7 @@ while ans:
     2.Decode an image
     3.Convert an image into a .wav file
     4.Decode a .wav file
+    5.Convert a .wav file into an image
     E: exit
     """)
     ans = input("What would you like to do?: ") 
@@ -20,12 +21,16 @@ while ans:
       file_path = input("File to decode: ")
       print(decodeImage(file_path))
     elif ans=="3":
-        image_path = input("File to convert: ")
-        new_file_name = input("Name of the new file: ")
-        createWavImage(image_path,new_file_name)
+      image_path = input("File to convert: ")
+      new_file_name = input("Name of the new file: ")
+      createWavImage(image_path,new_file_name)
     elif ans=="4":
-        audio_path = input("File to decode: ")
-        print(readData(audio_path))
+      audio_path = input("File to decode: ")
+      print(readData(audio_path))
+    elif ans=="5":
+      audio_path = input("File to convert: ")
+      new_name = input("Name of the new file: ")
+      createImageAudio(audio_path,new_name)
     elif ans=="E":
       sys.exit()
     elif ans !="":
