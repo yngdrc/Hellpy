@@ -1,4 +1,5 @@
 import numpy as np
+import math
 import pyaudio
 import sys
 import wave
@@ -17,7 +18,7 @@ def readData( audio_path ):
     audio_file = wave.open(audio_path, 'rb')
     nframes = audio_file.getnframes()
     data = audio_file.readframes(nframes)
-    return data
+    return data, audio_file
 
 def createWavImage( image_file, new_file_name ):
     #data_asarray = bytearray(readData(audio_file))
@@ -26,9 +27,9 @@ def createWavImage( image_file, new_file_name ):
     #    data_asarray[x] = image_data[x]
     nf = wave.open(new_file_name, 'wb')
 
-    nchannels = 1
+    nchannels = 2
     sampwidth = 2
-    framerate = 48000
+    framerate = (getImage(image_file)[1])*10
     nframe = len(image_data)
     comptype = "NONE"
     compname = "not compressed"
@@ -38,6 +39,8 @@ def createWavImage( image_file, new_file_name ):
     nf.close()
 
 def createImageAudio( audio_path, new_name ):
-    data = readData(audio_path)
-    img = Image.frombytes('RGB', getImage('image.jpg')[0].size, data, 'raw')
+    data = readData(audio_path)[0]
+    audio_file = readData(audio_path)[1]
+    framerate = audio_file.getframerate()//10
+    img = Image.frombytes('RGB', (framerate, len(data)//3//framerate), data, 'raw')
     img.save(new_name+".png")

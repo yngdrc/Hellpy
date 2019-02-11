@@ -1,0 +1,2 @@
+1. 'original_image' -> 'image_as_wav'
+2. 'image_as_wav' -> 'wav_as_image'
